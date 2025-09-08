@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/routes/lobby/+page.ts"],
+  "sourcesContent": ["console.log(\"Hello from +page.ts in the lobby route!\");\n"],
+  "mappings": ";AAAA,QAAQ,IAAI,yCAAyC;",
+  "names": []
+}
