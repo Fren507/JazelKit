@@ -2,18 +2,20 @@ import express from "express";
 import path from "path";
 import livereload from "livereload";
 import connectLivereload from "connect-livereload";
+import chalk from "chalk";
 import { fileURLToPath } from "url";
 import { readFile, access } from "fs/promises";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { buildAll } from "./build.js";
 import { log } from "console";
+// import { logMessage } from "./start.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = 5173;
+let port = 5173;
 
 const httpServer = createServer(app); // Express-Server in HTTP-Server packen
 const io = new Server(httpServer, {
@@ -49,7 +51,7 @@ function changeSiteContent(html, otherScripts = ["/src/main.js"]) {
       .join("\n")}
     </body>`
   );
-  site = site.replaceAll('.ts"', '.js"').replaceAll(".ts'", ".js'");
+  // site = site.replaceAll('.ts"', '.js"').replaceAll(".ts'", ".js'");
   site = site.replaceAll("<script src=", '<script type="module" src=');
   return site;
 }
@@ -70,6 +72,7 @@ app.use("/src", express.static(SOURCE_DIR));
 app.use("/assets", express.static(ASSETS_DIR));
 app.use("/css", express.static(CSS_DIR));
 app.use("/components", express.static(COMPONENTS_DIR));
+app.use("/favicon.ico", express.static(path.join(ASSETS_DIR, "favicon.ico")));
 
 app.use(connectLivereload({ port: 35729 }));
 
@@ -81,12 +84,15 @@ app.use((req, res, next) => {
 
 app.use(async (req, res) => {
   const routeHtmlPath = path.join(ROUTES_DIR, req.path, "+index.html");
-  const pageServerPath = path.join(ROUTES_DIR, req.path, "+page.ts");
+  const pagePathTypeScript = path.join(ROUTES_DIR, req.path, "+page.ts");
+  const pagePathJavaScript = path.join(ROUTES_DIR, req.path, "+page.js");
 
   if (await fileExists(routeHtmlPath)) {
-    const pageScripts = (await fileExists(pageServerPath))
-      ? [`/src/routes${req.path}/+page.js`]
-      : [];
+    let pageScripts = [];
+    if (await fileExists(pagePathTypeScript))
+      pageScripts.push(`/src/routes${req.path}/+page.ts`);
+    if (await fileExists(pagePathJavaScript))
+      pageScripts.push(`/src/routes${req.path}/+page.js`);
     log("Page Scripts:", pageScripts);
 
     const html = await readFile(routeHtmlPath, "utf8");
@@ -100,24 +106,38 @@ app.use(async (req, res) => {
 });
 
 httpServer.listen(port, async () => {
-  console.log(`Server läuft auf http://localhost:${port}`);
+  console.log(
+    `  ${chalk.green.bold("JazelKit ")} ${chalk.green("PreAlpha")}\n\n` +
+      `  ➜  Local:   http://localhost:${port}/\n` +
+      `  ➜  Network: use --host to expose\n` +
+      `  ➜  press h + enter to show help`
+  );
   await buildAll();
-  console.log("Seiten gebaut.");
+  console.log("Pages built.");
 });
+// .on("error", async (err) => {
+//   if (err.code === "EADDRINUSE") {
+//     console.error(`Port ${port} is already in use!`);
+//   } else if (err.code === "EACCES") {
+//     console.error(`No permission for port ${port}.`);
+//   } else {
+//     console.error("Server error:", err);
+//   }
+// });
 
 io.on("connection", (socket) => {
-  console.log("Neuer Socket verbunden:", socket.id);
+  console.log("New socket connected:", socket.id);
 
-  // Beispiel: Nachricht vom Client empfangen
+  // Example: Receive message from client
   socket.on("clientMessage", (data) => {
-    console.log("Client sagt:", data);
+    console.log("Client says:", data);
 
-    // Broadcast an alle Clients
-    io.emit("serverMessage", `Server hat es erhalten: ${data}`);
+    // Broadcast to all clients
+    io.emit("serverMessage", `Server received: ${data}`);
   });
 
   // Disconnect
   socket.on("disconnect", () => {
-    console.log("Socket getrennt:", socket.id);
+    console.log("Socket disconnected:", socket.id);
   });
 });
