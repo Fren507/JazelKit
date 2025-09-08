@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
     "ms-vscode.vscode-typescript-tslint-plugin",
     "aaron-bond.better-comments"
   ]
