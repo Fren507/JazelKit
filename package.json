@@ -1,0 +1,52 @@
+{
+  "name": "jazelkit",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "default": "./dist/main.js"
+    },
+    "./helpers": {
+      "types": "./dist/helpers.d.ts",
+      "default": "./dist/helpers.js"
+    },
+    "./types": {
+      "types": "./dist/JazelKitConfig.d.ts",
+      "default": "./dist/JazelKitConfig.js"
+    }
+  },
+  "types": "dist/main.d.ts",
+  "scripts": {
+    "dev": "npx tsc --watch",
+    "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "Jason Frenzel",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "connect-livereload": "^0.6.1",
+    "esbuild": "^0.25.9",
+    "express": "^5.1.0",
+    "jsdom": "^27.0.0",
+    "livereload": "^0.10.3",
+    "node-fetch": "^3.3.2",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "@eslint/json": "^0.13.2",
+    "@eslint/markdown": "^7.2.0",
+    "@types/connect-livereload": "^0.6.3",
+    "@types/express": "^5.0.3",
+    "@types/jsdom": "^21.1.7",
+    "@types/livereload": "^0.9.5",
+    "eslint": "^9.35.0",
+    "globals": "^16.4.0",
+    "typescript-eslint": "^8.43.0"
+  }
+}
