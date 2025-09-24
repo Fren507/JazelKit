@@ -6,7 +6,7 @@ import connectLivereload from "connect-livereload";
 import chalk from "chalk";
 import express, { NextFunction } from "express";
 import { createServer } from "http";
-import { Server } from "socket.io";
+import { Namespace, Server } from "socket.io";
 import { JSDOM } from "jsdom";
 import { buildAll } from "./build.js";
 import { layout } from "./layout.js";
@@ -19,7 +19,10 @@ import { type JazelKitConfig } from "./JazelKitConfig.js";
 //*  TYPES AND INTERFACES  *//
 //* ////////////////////// *//
 
-export type SocketMiddleware = (io: Server, app: Express.Application) => void;
+export type SocketMiddleware = (
+  io: Namespace,
+  app: Express.Application
+) => void;
 export type ExpressMiddleware = (
   req: Express.Request,
   res: Express.Response,
@@ -37,9 +40,9 @@ export async function startServer(
   const app = express();
   const port: number = (config.port || 5173) as number;
 
-  const httpServer = createServer(app); // Express-Server in HTTP-Server packen
+  const httpServer = createServer(app);
   const io = new Server(httpServer, {
-    cors: { origin: `http://localhost:${port}` }, // falls Frontend lokal läuft
+    cors: { origin: `http://localhost:${port}` },
   });
 
   const reloadServer = livereload.createServer({ port: 24680 });
@@ -216,14 +219,19 @@ export async function startServer(
   for (const moduleFile of allModuleFiles) {
     try {
       const importedModule = await import(moduleFile);
-      if (importedModule && typeof importedModule.express === "function") {
-        const func: SocketMiddleware = importedModule.express;
-        func(io, app);
-        console.log(`Imported module ${moduleFile} as Express Module.`);
-      } else {
-        console.warn(
-          `Module ${moduleFile} does not export a express function.`
-        );
+      if (importedModule && typeof importedModule.socket === "function") {
+        if (importedModule && typeof importedModule.socketPath === "string") {
+          const func: SocketMiddleware = importedModule.socket;
+          console.log(`Imported module ${moduleFile} as Socket Module.`);
+          // Hier wird ein Namensraum erstellt, wenn ein socketPath definiert ist
+          const chatNamespace = io.of(importedModule.socketPath);
+          // die Funktion `func` wird nun mit dem Namensraum aufgerufen
+          func(chatNamespace, app);
+        } else {
+          console.error(
+            `Error in ${moduleFile}\nModule ${moduleFile} is missing a socketPath export. (export const socketPath = "/your-path";)`
+          );
+        }
       }
       if (importedModule && typeof importedModule.middleware === "function") {
         const func: ExpressMiddleware = importedModule.middleware;
@@ -255,5 +263,5 @@ export type * from "./JazelKitConfig.d.ts";
 export type * from "./layout.d.ts";
 export type * from "./main.d.ts";
 export type * from "./manipulateDom.d.ts";
-export type { Server } from "socket.io";
+export type { Namespace } from "socket.io";
 export * from "./helpers.js";
