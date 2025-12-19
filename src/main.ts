@@ -54,7 +54,7 @@ export async function startServer(
 
   const ROUTES_DIR = path.join(rootDir, `/routes`);
   const ASSETS_DIR = path.join(publicDir, `/assets`);
-  const CSS_DIR = path.join(rootDir, `/others/css`);
+  const CSS_DIR = path.join(rootDir, `/css`);
   const SOURCE_DIR = path.join(publicDir, `/src/`);
   // const ROUTES_SOURCE_DIR = path.join(publicDir, `/src/routes`);
   const COMPONENTS_DIR = path.join(rootDir, `/components`);
