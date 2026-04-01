@@ -1,9 +1,11 @@
 // src/manipulateDom.ts
 
 import express from "express";
+import { JazelKitConfig } from "./JazelKitConfig.js";
 export function manipulateSiteDom(
   dom: Document,
   req: express.Request,
+  config: JazelKitConfig,
   otherScripts: string[] = []
 ) {
   // Füge hier deine DOM-Manipulationen hinzu
@@ -16,6 +18,8 @@ export function manipulateSiteDom(
   const metaCharset = dom.createElement("meta");
   metaCharset.setAttribute("charset", "UTF-8");
   dom.head.appendChild(metaCharset);
+
+  //! WIESO MUSS SSR SO KOMPLIZIERT SEIN?! >:((
 
   const globalVarsScript = dom.createElement("script");
   globalVarsScript.textContent = `
@@ -32,6 +36,14 @@ export function manipulateSiteDom(
   `;
   dom.body.appendChild(globalVarsScript);
 
+  const styleLink = dom.head.querySelector('link[rel="stylesheet"]');
+  let style = dom.head.querySelector("style");
+  if (!(style || styleLink)) {
+    style = dom.createElement("style");
+    style.textContent = `*{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;}`;
+    dom.head.appendChild(style);
+  }
+
   const mainScript = dom.createElement("script");
   mainScript.src = "/src/scripts/main.js";
   mainScript.async = true;
@@ -40,7 +52,10 @@ export function manipulateSiteDom(
   for (const src of otherScripts) {
     const script = dom.createElement("script");
     script.type = "module";
-    script.src = src.replaceAll("ts", "js");
+    script.src =
+      src.split(".")[src.split(".").length - 1] === "ts"
+        ? src.split(".").slice(0, -1).join(".") + ".js"
+        : src;
     dom.body.appendChild(script);
   }
 }

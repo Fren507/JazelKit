@@ -2,14 +2,12 @@
 
 import path from "path";
 import { context } from "esbuild";
-import { log } from "console";
 import { JazelKitConfig } from "./JazelKitConfig.js";
 import { collectFiles } from "./helpers.js";
 
 async function collectProjectFiles(
   SCRIPTS_DIR: string,
-  ROUTES_DIR: string,
-  MODULES_DIR: string
+  ROUTES_DIR: string
 ): Promise<string[]> {
   const scriptFiles = await collectFiles(SCRIPTS_DIR, (name) =>
     name.endsWith(".ts")
@@ -18,11 +16,14 @@ async function collectProjectFiles(
     ROUTES_DIR,
     (name) => name.endsWith("+page.ts") || name.endsWith("+page.js")
   );
-  const moduleFiles = await collectFiles(
+  return [...scriptFiles, ...routeFiles];
+}
+
+async function collectModuleFiles(MODULES_DIR: string): Promise<string[]> {
+  return collectFiles(
     MODULES_DIR,
     (name) => name.endsWith(".ts") || name.endsWith(".js")
   );
-  return [...scriptFiles, ...routeFiles, ...moduleFiles];
 }
 
 export async function buildAll(
@@ -33,17 +34,9 @@ export async function buildAll(
 ) {
   const SCRIPTS_DIR = path.join(ROOT_DIR, "scripts");
   const ROUTES_DIR = path.join(ROOT_DIR, "routes");
-  log("Scripts Dir:", SCRIPTS_DIR);
-  log("Routes Dir:", ROUTES_DIR);
-  log("Modules Dir:", MODULES_DIR);
-  // Sammle alle .ts Dateien in den angegebenen Verzeichnissen
-  const entryPoints = await collectProjectFiles(
-    SCRIPTS_DIR,
-    ROUTES_DIR,
-    MODULES_DIR
-  );
-  log("Entry Points:", entryPoints);
+  const entryPoints = await collectProjectFiles(SCRIPTS_DIR, ROUTES_DIR);
 
+  // 1. Browser-Build (ctx) - Bleibt unverändert, da es keinen Node-Code bündelt
   const ctx = await context({
     entryPoints,
     bundle: true,
@@ -53,7 +46,28 @@ export async function buildAll(
     outdir: SOURCE_DIR,
     sourcemap: config.build?.sourcemap || false,
     minify: config.build?.minify || true,
+    loader: config.build?.loaderOptions || {},
   });
 
-  await ctx.watch(); // aktiviert den Watch-Modus
+  const moduleFiles = await collectModuleFiles(MODULES_DIR);
+
+  // 2. Node.js-Build (module) - Wichtige Änderung hier:
+  const module = await context({
+    entryPoints: moduleFiles,
+    bundle: true,
+    platform: "node",
+    format: "esm",
+    outbase: MODULES_DIR,
+    outdir: path.join(SOURCE_DIR, "modules"),
+    sourcemap: config.build?.sourcemap || false,
+    minify: config.build?.minify || true,
+
+    // NEU: Markiert alle Abhängigkeiten als extern
+    packages: "external",
+  });
+
+  //! ES SOLL KLAPPEN!!! AHHHH
+
+  await ctx.watch();
+  await module.watch();
 }

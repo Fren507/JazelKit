@@ -1,6 +1,6 @@
 // src/layout.ts
 
-import { fileExists } from "./main.js";
+import { pathExists } from "./main.js";
 import path from "path";
 import { readFile } from "fs/promises";
 import { JazelKitConfig } from "./JazelKitConfig.js";
@@ -62,7 +62,7 @@ export async function layout(
       continue;
     }
     const componentFilePath = path.join(COMPONENTS_DIR, name + ".html");
-    if (await fileExists(componentFilePath)) {
+    if (await pathExists(componentFilePath)) {
       const componentFile = await readFile(componentFilePath, "utf8");
       // Insert as HTML (parse into nodes for safety)
       const tmpDoc = layout.implementation.createHTMLDocument("");
@@ -78,4 +78,7 @@ export async function layout(
       component.replaceWith("");
     }
   }
+
+  //! WIESO! ES FUNKTIONIERT, ABER WIE?!
+  //// Befreie mich… bitte…
 }
