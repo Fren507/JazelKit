@@ -5,6 +5,5 @@ build/
 .env
 .vscode/
 !.vscode/recommended-extensions.json
-!.vscode/settings.json
 .idea/
 

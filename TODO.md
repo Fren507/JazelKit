@@ -7,6 +7,7 @@
 - [ ] Projektstruktur dokumentieren
 - [ ] README-Datei aktualisieren
 - [ ] Tests für alle Module hinzufügen
+- [x] Durchdrehen
 
 ### Framework
 
@@ -34,3 +35,16 @@
 - [ ] Beispiele für die Nutzung des Frameworks hinzufügen.
 - [ ] API-Dokumentation für alle öffentlichen Funktionen erstellen.
 - [ ] Changelog für zukünftige Versionen vorbereiten.
+- [ ] Füge Dokumentationen zu den Funktionen hinzu, z.B.:
+
+  ```typescript
+  /**
+   * Funktion zum Beispiel
+   * @param param1 - Beschreibung von param1
+   * @returns Beschreibung des Rückgabewerts
+   */
+  function exampleFunction(param1: string): string {
+    // Funktionalität hier
+    return `Ergebnis: ${param1}`;
+  }
+  ```
