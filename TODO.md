@@ -29,6 +29,7 @@
 - [x] ESLint und Prettier für konsistente Codequalität einrichten.
 - [ ] TypeScript-Typen für alle Module überprüfen und verbessern.
 - [ ] Automatisierte Builds und Tests in CI/CD-Pipeline integrieren.
+- [ ] Automatisches Initalisierungsskript für neue Projekte erstellen.
 
 ### Dokumentation
 

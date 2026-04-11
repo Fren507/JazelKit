@@ -6,4 +6,4 @@ build/
 .vscode/
 !.vscode/recommended-extensions.json
 .idea/
-
+package-lock.json
