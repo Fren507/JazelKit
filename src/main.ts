@@ -21,12 +21,12 @@ import { log } from "console";
 
 export type SocketMiddleware = (
   io: Namespace,
-  app: Express.Application
+  app: Express.Application,
 ) => void;
 export type ExpressMiddleware = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => void;
 
 //* //////////// *//
@@ -37,7 +37,7 @@ const DEBUG = true;
 
 export async function startServer(
   __dirname: string,
-  config: JazelKitConfig = {}
+  config: JazelKitConfig = {},
 ) {
   const app = express();
   const port: number = (config.port || 80) as number;
@@ -84,9 +84,9 @@ export async function startServer(
           to
             .replaceAll("$assets", ASSETS_DIR)
             .replaceAll("$src", SOURCE_DIR)
-            .replaceAll("$root", rootDir)
-        )
-      )
+            .replaceAll("$root", rootDir),
+        ),
+      ),
     );
   }
 
@@ -155,7 +155,7 @@ export async function startServer(
         <head>
           </head><html>
           <body></body>
-        </html>`
+        </html>`,
       );
       let currentContent = await JSDOM.fromFile(routeHtmlPath);
       const layoutScripts: Array<string> = [];
@@ -167,7 +167,7 @@ export async function startServer(
           COMPONENTS_DIR,
           layoutDom.window.document,
           currentContent.window.document,
-          config
+          config,
         );
         currentContent = layoutDom;
         if (await pathExists(path.join(layoutPath, "+layout.server.ts"))) {
@@ -180,13 +180,13 @@ export async function startServer(
 
       if (layoutScripts.length === 0) {
         layoutDom = new JSDOM(
-          `<!DOCTYPE html><html><body><slot /></body></html>`
+          `<!DOCTYPE html><html><body><slot /></body></html>`,
         );
         await layout(
           COMPONENTS_DIR,
           layoutDom.window.document,
           currentContent.window.document,
-          config
+          config,
         );
         currentContent = layoutDom;
       }
@@ -221,15 +221,15 @@ export async function startServer(
     if (notAvailableLevel >= 1) {
       const availablePaths = await getChildDirs(
         path.join(ROUTES_DIR, unavailableSincePath),
-        /^\[.*\]$/ // regex for dynamic paths (e.g. [id])
+        /^\[.*\]$/, // regex for dynamic paths (e.g. [id])
       );
       console.info(
-        `Available dynamic paths at this level: ${availablePaths.join(", ")}`
+        `Available dynamic paths at this level: ${availablePaths.join(", ")}`,
       );
     }
 
     console.info(
-      `Path is not available. Level of unavailability: ${notAvailableLevel} (${unavailableSincePath})`
+      `Path is not available. Level of unavailability: ${notAvailableLevel} (${unavailableSincePath})`,
     );
 
     const layoutDom = await JSDOM.fromFile(layoutHtmlPath);
@@ -238,7 +238,7 @@ export async function startServer(
       COMPONENTS_DIR,
       layoutDom.window.document,
       html404Dom.window.document,
-      config
+      config,
     );
 
     manipulateSiteDom(layoutDom.window.document, req, config);
@@ -255,13 +255,13 @@ export async function startServer(
               ? "  ➜  Local:   http://localhost/ or http://localhost:80/\n"
               : `  ➜  Local:   http://localhost:${customPort}/\n`) +
             `  ➜  Network: use --host to expose` +
-            `  ➜  press h + enter to show help`
+            `  ➜  press h + enter to show help`,
         );
       })
       .on("error", (err) => {
         if (err.name === "EADDRINUSE") {
           console.error(
-            `Port ${customPort} is already in use! Trying ${customPort + 1}...`
+            `Port ${customPort} is already in use! Trying ${customPort + 1}...`,
           );
           startServer(customPort + 1);
         } else if (err.name === "EACCES") {
@@ -277,7 +277,7 @@ export async function startServer(
   }
   const allModuleFiles = await collectFiles(
     path.join(publicDir, "src/modules"),
-    (name) => name.endsWith(".js")
+    (name) => name.endsWith(".js"),
   );
   for (const moduleFile of allModuleFiles) {
     try {
@@ -292,7 +292,7 @@ export async function startServer(
           func(chatNamespace, app);
         } else {
           console.error(
-            `Error in ${moduleFile}\nModule ${moduleFile} is missing a socketPath export. (export const socketPath = "/your-path";)`
+            `Error in ${moduleFile}\nModule ${moduleFile} is missing a socketPath export. (export const socketPath = "/your-path";)`,
           );
         }
       }
@@ -302,7 +302,7 @@ export async function startServer(
         console.log(`Imported module ${moduleFile} as Express Middleware.`);
       } else {
         console.warn(
-          `Module ${moduleFile} does not export a middleware function.`
+          `Module ${moduleFile} does not export a middleware function.`,
         );
       }
     } catch (error) {
@@ -314,7 +314,7 @@ export async function startServer(
       if (DEBUG) {
         console.time(`[${req.method}] ${req.path}: `);
         res.on("finish", () =>
-          console.timeEnd(`[${req.method}] ${req.path}: `)
+          console.timeEnd(`[${req.method}] ${req.path}: `),
         );
       }
       next();

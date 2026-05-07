@@ -40,7 +40,7 @@ export function manipulateSiteDom(
   let style = dom.head.querySelector("style");
   if (!(style || styleLink)) {
     style = dom.createElement("style");
-    style.textContent = `*{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;}`;
+    style.textContent = `*{font-family:system-ui,-apple-system,BlinkMacSystemFont,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;}`;
     dom.head.appendChild(style);
   }
 
