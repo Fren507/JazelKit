@@ -36,7 +36,7 @@ After cloning, do these steps:
 
 ..
 
-   [!TIP] If ``npm link`` isn't working, try it again with ``sudo``:
+   [!TIP] If ``npm link`` isn’t working, try it again with ``sudo``:
 
    .. code:: sh
 
@@ -53,7 +53,7 @@ To use JazelKit inside a project, run the following to install it:
 
 | Now you can import JazelKit!
 | Because JazelKit is still in alpha stage, you have to create files
-  manually! But you won't have to, because you can clone the example
+  manually! But you won’t have to, because you can clone the example
   template:
 
 .. code:: sh
