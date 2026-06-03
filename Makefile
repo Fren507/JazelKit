@@ -32,7 +32,7 @@ commit:
 #		pr -h "README" -n -w 80 \
 #		> $(PROJECTROOT)/README.txt
 	cat $(PROJECTROOT)/README.rst | \
-		pr -h "README" -n -w 80 \
+		pr -h "README" -n -w 140 \
 		> $(PROJECTROOT)/README.txt
 	git add -A
 	git commit

@@ -1,6 +1,6 @@
 
 
-2026-06-03 18:42                         README                          Seite 1
+2026-06-03 18:44                                                       README                                                        Seite 1
 
 
     1	JazelKit
@@ -66,7 +66,7 @@
 
 
 
-2026-06-03 18:42                         README                          Seite 2
+2026-06-03 18:44                                                       README                                                        Seite 2
 
 
    57	  template:
