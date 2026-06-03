@@ -27,8 +27,11 @@ make-md-docs:
 commit:
 	$(MAKE) migrate-docs
 	# Add README.txt from README.rst (Fixed variable syntax here)
+#	cat $(PROJECTROOT)/README.rst | \
+#		fold -sw 75 | \
+#		pr -h "README" -n -w 80 \
+#		> $(PROJECTROOT)/README.txt
 	cat $(PROJECTROOT)/README.rst | \
-		fold -sw 75 | \
 		pr -h "README" -n -w 80 \
 		> $(PROJECTROOT)/README.txt
 	git add -A

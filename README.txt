@@ -1,6 +1,6 @@
 
 
-2026-06-03 17:27                         README                          Seite 1
+2026-06-03 18:42                         README                          Seite 1
 
 
     1	JazelKit
@@ -66,19 +66,19 @@
 
 
 
-2026-06-03 17:27                         README                          Seite 2
+2026-06-03 18:42                         README                          Seite 2
 
 
    57	  template:
    58	
    59	.. code:: sh
    60	
-   61	   git clone https://github.com/Fren507/JazelKit-Template.git 
-   62	path/to/project
-   63	   cd path/to/project
-   64	   npm i
-   65	   npm link jazelkit
-   66	   npm run dev
+   61	   git clone https://github.com/Fren507/JazelKit-Template.git path/to/project
+   62	   cd path/to/project
+   63	   npm i
+   64	   npm link jazelkit
+   65	   npm run dev
+
 
 
 
