@@ -36,7 +36,7 @@ After cloning, do these steps:
 
 ..
 
-   [!TIP] If ``npm link`` isn’t workig, try it again with ``sudo``:
+   [!TIP] If ``npm link`` isn’t working, try it again with ``sudo``:
 
    .. code:: sh
 
@@ -45,7 +45,7 @@ After cloning, do these steps:
 Usage
 ~~~~~
 
-To use JazelKit inside an project, run the following to install it:
+To use JazelKit inside a project, run the following to install it:
 
 .. code:: sh
 

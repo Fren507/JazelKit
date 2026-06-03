@@ -1,6 +1,6 @@
 
 
-2026-06-03 17:17                         README                          Seite 1
+2026-06-03 17:27                         README                          Seite 1
 
 
     1	JazelKit
@@ -41,7 +41,7 @@
    36	
    37	..
    38	
-   39	   [!TIP] If ``npm link`` isn’t workig, try it again with ``sudo``:
+   39	   [!TIP] If ``npm link`` isn’t working, try it again with ``sudo``:
    40	
    41	   .. code:: sh
    42	
@@ -50,7 +50,7 @@
    45	Usage
    46	~~~~~
    47	
-   48	To use JazelKit inside an project, run the following to install it:
+   48	To use JazelKit inside a project, run the following to install it:
    49	
    50	.. code:: sh
    51	
@@ -66,7 +66,7 @@
 
 
 
-2026-06-03 17:17                         README                          Seite 2
+2026-06-03 17:27                         README                          Seite 2
 
 
    57	  template:
