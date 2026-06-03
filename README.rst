@@ -1,8 +1,6 @@
 JazelKit
 ========
 
-   [!NOTE] Deutsche Dokumentation: `Hier klicken <./README.de.md>`__
-
 Table of Contents
 -----------------
 
@@ -13,8 +11,6 @@ Table of Contents
 
     - `Clone and Build for install <#clone-and-build-for-install>`__
     - `Use in your project <#use-in-your-project>`__
-
-  - `Contributing <#contributing>`__
 
 Install
 -------
@@ -40,16 +36,13 @@ After cloning, do these steps:
 
 ..
 
-   [!TIP] If ``npm link`` isn’t working and you’re on an Unix-like
-   system (MacOS, Linux), try it again with ``sudo``:
+   [!TIP] If ``npm link`` isn't workig, try it again with ``sudo``:
 
    .. code:: sh
 
       sudo npm link
 
-   If you’re on Windows, I do not know… Tja ;)
-
-Use in your project
+Usage
 ~~~~~~~~~~~~~~~~~~~
 
 To use JazelKit inside an project, run the following to install it:
@@ -71,8 +64,3 @@ To use JazelKit inside an project, run the following to install it:
    npm link jazelkit
    npm run dev
 
-Contributing
-------------
-
-If you want to contribute to JazelKit, check out
-`CONTRIBUTING.md <./CONTRIBUTING.md>`__ and create a Pull Request!
