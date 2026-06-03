@@ -1,9 +1,22 @@
+# NodeJS
 node_modules/
+
+# Production/Build outputs
 dist/
 build/
+
+# Logs and system files
 .DS_Store
+
+# Local environment variables
 .env
-.vscode/
-!.vscode/recommended-extensions.json
+
+# IDEs and Editors
 .idea/
-package-lock.json
+
+# VS Code configuration
+.vscode/*
+!.vscode/recommended-extensions.json
+
+# Development environment only files
+README.md

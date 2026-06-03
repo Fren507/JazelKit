@@ -36,14 +36,14 @@ After cloning, do these steps:
 
 ..
 
-   [!TIP] If ``npm link`` isn't workig, try it again with ``sudo``:
+   [!TIP] If ``npm link`` isn’t workig, try it again with ``sudo``:
 
    .. code:: sh
 
       sudo npm link
 
 Usage
-~~~~~~~~~~~~~~~~~~~
+~~~~~
 
 To use JazelKit inside an project, run the following to install it:
 
@@ -63,4 +63,3 @@ To use JazelKit inside an project, run the following to install it:
    npm i
    npm link jazelkit
    npm run dev
-
