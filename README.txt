@@ -1,6 +1,6 @@
 
 
-2026-06-03 18:44                                                       README                                                        Seite 1
+2026-06-03 18:53                                                       README                                                        Seite 1
 
 
     1	JazelKit
@@ -41,7 +41,7 @@
    36	
    37	..
    38	
-   39	   [!TIP] If ``npm link`` isn’t working, try it again with ``sudo``:
+   39	   [!TIP] If ``npm link`` isn't working, try it again with ``sudo``:
    40	
    41	   .. code:: sh
    42	
@@ -58,7 +58,7 @@
    53	
    54	| Now you can import JazelKit!
    55	| Because JazelKit is still in alpha stage, you have to create files
-   56	  manually! But you won’t have to, because you can clone the example
+   56	  manually! But you won't have to, because you can clone the example
 
 
 
@@ -66,7 +66,7 @@
 
 
 
-2026-06-03 18:44                                                       README                                                        Seite 2
+2026-06-03 18:53                                                       README                                                        Seite 2
 
 
    57	  template:
