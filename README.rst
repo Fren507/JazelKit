@@ -36,7 +36,8 @@ After cloning, do these steps:
 
 ..
 
-   [!TIP] If ``npm link`` isn't working, try it again with ``sudo``:
+   [!TIP] 
+   If ``npm link`` isn't working, try it again with ``sudo``:
 
    .. code:: sh
 
