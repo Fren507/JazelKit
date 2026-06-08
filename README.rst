@@ -4,13 +4,13 @@ JazelKit
 Table of Contents
 -----------------
 
-- `JazelKit <#jazelkit>`__
+* `JazelKit <#jazelkit>`__
 
-  - `Table of Contents <#table-of-contents>`__
-  - `Install <#install>`__
+  * `Table of Contents <#table-of-contents>`__
+  * `Install <#install>`__
 
-    - `Clone and Build for install <#clone-and-build-for-install>`__
-    - `Use in your project <#use-in-your-project>`__
+    * `Clone and Build for install <#clone-and-build-for-install>`__
+    * `Use in your project <#use-in-your-project>`__
 
 Install
 -------
@@ -64,4 +64,16 @@ To use JazelKit inside a project, run the following to install it:
    cd path/to/project
    npm i
    npm link jazelkit
-   npm run dev
+   npm run
+
+Scheiße
+-------
+
++-----------------+----------+--------------+
+| Spalte 1 Tietel | Tietel 2 | Tietel 3     |
++=================+==========+==============+
+| Inhalt Zeile 1  | Zeile 1  | Auch Zeile 1 |
++-----------------+----------+--------------+
+| Zeile 2         | Zeile 2, aber geteilt!  |
++-----------------+-------------------------+
+
