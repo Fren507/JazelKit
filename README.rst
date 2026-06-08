@@ -66,14 +66,3 @@ To use JazelKit inside a project, run the following to install it:
    npm link jazelkit
    npm run
 
-Scheiße
--------
-
-+-----------------+----------+--------------+
-| Spalte 1 Tietel | Tietel 2 | Tietel 3     |
-+=================+==========+==============+
-| Inhalt Zeile 1  | Zeile 1  | Auch Zeile 1 |
-+-----------------+----------+--------------+
-| Zeile 2         | Zeile 2, aber geteilt!  |
-+-----------------+-------------------------+
-
