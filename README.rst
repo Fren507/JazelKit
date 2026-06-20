@@ -66,3 +66,21 @@ To use JazelKit inside a project, run the following to install it:
    npm link jazelkit
    npm run
 
+JavaScript Config
+~~~~~~~~~~~~~~~~~
+
+Because JavaScript has no type declerations, you have to use JSDoc for autocompletion:
+
+.. code:: js
+  // @Filename: jazelkit.config.js
+  /**
+   * @file JazelKit configuration file
+   * @author Jason Frenzel < GitHub: Fren507 >
+   */
+
+  /** @type {import("jazelkit").JazelKitConfig} */
+  const config = {
+      // ...
+  };
+
+  export default config;

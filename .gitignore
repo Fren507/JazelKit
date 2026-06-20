@@ -8,8 +8,9 @@ build/
 # Logs and system files
 .DS_Store
 
-# Local environment variables
+# Local (environment) variables
 .env
+.local/
 
 # IDEs and Editors
 .idea/
@@ -21,5 +22,5 @@ build/
 # Development environment only files
 README.md
 README.txt 
-# You've served well... goodbye!
+# You've served well...
 
